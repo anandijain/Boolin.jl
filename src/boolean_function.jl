@@ -6,7 +6,7 @@ function boolean_functions(x)
     bs = bool_itr(2^n)
     for b in bs
         t = boolean_function(x, tups, b)
-        push!(fs, _fix(t))
+        push!(fs, t)
     end
     fs
 end

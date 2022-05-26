@@ -10,4 +10,4 @@ tts = reduce(hcat, tt.(fs))'
 @test evalpoly.(2, reverse.(eachrow(tts))) == 0:255
 
 t = @elapsed boolean_function(100, 30)
-@test t < 5
+@test t < 10

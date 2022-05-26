@@ -1,0 +1,13 @@
+name = "Boolin"
+uuid = "35dd214e-c2db-4c8c-90c4-e4aaf3ce35bf"
+authors = ["anand jain <anandj@uchicago.edu>"]
+version = "0.1.0"
+
+[deps]
+Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

@@ -36,6 +36,9 @@ f = boolean_function(falses(8)) # function from values
 
 @test Bool(BooleanFunction(3, 2)(bools(2)[3]))
 
+# a nicer error might be good
+@test_throws InexactError boolean_function(257, 3) 
+
 # make sure getting functions with large number of variables isn't too slow
 t = @elapsed boolean_function(100, 30)
 @test t < 10

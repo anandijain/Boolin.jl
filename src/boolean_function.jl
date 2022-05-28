@@ -51,9 +51,9 @@ this will give the boolean function corresponding to the truth table of the bina
 note that this is different from Mathematica's `BooleanFunction` which is the function corresponding to the binary decomposition of `k`.
 """
 boolean_function(k::Integer, n::Integer) = boolean_function(ith_bools(k, n))
-binary_decomposition(k, n) = reverse!(digits(Bool, k; base=2, pad=2^n))
+binary_decomposition(k, n) = reverse!(digits(Bool, k; base=2, pad=n))
 binary_decomposition(k) = binary_decomposition(k, 0)
-ith_bools(k, n) = binary_decomposition(k - 1, n)
+ith_bools(k, n) = binary_decomposition(k - 1, 2^n)
 from_bools!(bs) = evalpoly(2, reverse!(bs))
 from_bools(bs) = evalpoly(2, reverse(bs))
 # from_bools(bs) = evalpoly(2, Iterators.reverse(bs))

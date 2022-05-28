@@ -12,9 +12,10 @@ f = Num(false)
 @test tt(f, x[1]) == [false, false] # or the variables
 @test tt(f, [x[1], x[2]]) == falses(4)
 
-fs = boolean_functions(n)
+fs = collect(boolean_functions(n))
 vars = boolean_variables.(fs)
-@test isequal(vars[1], x) && allequal(vars) # sorted [x[1], x[2], x[3]]
+
+@test isequal(vars[1], x) && all(isequal(first(vars)), vars) # sorted [x[1], x[2], x[3]]
 
 f = fs[3] # (x[1] & x[2]) & !(x[3])
 bf = BooleanFunction(f)
@@ -26,9 +27,9 @@ bf = BooleanFunction(f)
 # Map[x | -> FromDigits[Boole[BooleanTable[x]], 2], fs]
 bfs = BooleanFunction.(fs)
 bs = bools(n)
-tts = map(f -> f.(bs), bfs)
+tts = map(f -> f.(bs), bfs)[begin:end]
 @test from_bools.(tts) == 0:255
-@test from_bools.(tt.(fs)) == 0:255
+@test from_bools.(tt.(fs)[begin:end]) == 0:255
 
 f = boolean_function(falses(8)) # function from values
 @test_throws InexactError boolean_function(falses(7)) # incomplete tables not implemented

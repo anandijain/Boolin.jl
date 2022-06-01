@@ -195,3 +195,20 @@ function goodbad(f, xs; verbose=false)
     good, bad
 end
 gud, bad = goodbad(simplify_boolean_function, fs)
+
+aa = []
+for goodf in gud
+    f = goodf[1][2]
+    f2 = last(goodf)
+    ftt = tt(f, vars)
+    f2tt = tt(f2, vars)
+    x = ftt == f2tt
+    push!(aa, x)
+end
+bgs = findall(!, aa)
+bg = gud[bgs[1]]
+bgidx = bg[1][1]
+simplified_badgood = bg[end]
+
+@test tt(fs[bgidx]) == tt(boolean_function(bgidx, 3))
+@test_broken tt(fs[bgidx]) == tt(simplified_badgood)

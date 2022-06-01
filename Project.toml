@@ -4,6 +4,8 @@ authors = ["anand jain <anandj@uchicago.edu>"]
 version = "0.1.0"
 
 [deps]
+Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
+Groebner = "0b43b601-686d-58a3-8a1c-6623616c7cd4"
 Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
 
 [extras]

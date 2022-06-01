@@ -2,6 +2,7 @@ module Boolin
 
 using Base.Iterators
 using Symbolics
+using Combinatorics
 
 # @register_symbolic (Base.:&)(x, y)::Bool
 # @register_symbolic (Base.:|)(x, y)::Bool
@@ -16,6 +17,6 @@ bools(n) = collect.(bool_itr(n))[begin:end]
 include("boolean_function.jl")
 
 export bool_itr, bools, bool_matrix, tt, boolean_function, boolean_functions, BooleanFunction
-export ith_bools, from_bools, boolean_variables, make_boolean_variables
+export binary_decomposition, ith_bools, from_bools, boolean_variables, make_boolean_variables
 
 end # module

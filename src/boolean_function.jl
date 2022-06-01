@@ -1,4 +1,8 @@
-"generates all boolean functions with the symbols x, will be 2^(2^(length(x)))"
+"
+generates all boolean functions with the symbols x, will be 2^(2^(length(x)))
+
+https://oeis.org/A001146
+"
 function boolean_functions(x)
     # fs = Num[]
     n = length(x)
@@ -11,10 +15,24 @@ function boolean_functions(x)
     # fs
     (boolean_function(x, tups, b) for b in bs)
 end
+
 boolean_functions(n::Integer) = boolean_functions(make_boolean_variables(n))
+"https://oeis.org/A057156"
+boolean_functions(n::Integer, m::Integer) = boolean_functions(make_boolean_variables(n), m)
+
+function boolean_functions(x, m::Integer)
+    fs = boolean_functions(x)
+    product(Iterators.repeated(fs, m)...)
+end
+
+"is (f1, f2, f3) the same as (f1, f3, f2)?"
+function unique_boolean_functions(n, m)
+    fs = boolean_functions(n)
+    combinations(fs, m)
+end
 
 function tt(f, x)
-    map(b -> substitute(f, Dict{Num, Bool}(x .=> b)), bools(length(x)))[begin:end]
+    map(b -> substitute(f, Dict{Num,Bool}(x .=> b)), bools(length(x)))[begin:end]
 end
 
 "truth table"

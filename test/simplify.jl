@@ -180,3 +180,18 @@ gb7 = groebner(eqs) # [x1*x3^2 + x1*x3, x1*x2 - x1*x3]
 # f222(x1, x2, x3) = x1 * x3^2 + x1 * x3, x1 * x2 - x1 * x3
 
 # f7_converted = ((x1 & x3) | ((x1 & x2) & !(x1 & x3)))
+function goodbad(f, xs; verbose=false)
+    good = []
+    bad = []
+    for (i, x) in enumerate(xs)
+        verbose && @info x
+        try
+            y = f(x)
+            push!(good, (i, x) => y)
+        catch e
+            push!(bad, (i, x) => e)
+        end
+    end
+    good, bad
+end
+gud, bad = goodbad(simplify_boolean_function, fs)
